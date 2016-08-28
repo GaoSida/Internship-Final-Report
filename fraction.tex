@@ -1,0 +1,23 @@
+
+
+Shayan’s project is actually quite like ours, to use old data to evaluate new policy. To test the robustness of the policies, we are aiming to make a matrix of how different student models perform under different policies. Major next steps we are thinking is combine the student and reward model as one (so that we can directly predict the posttest performance given the within- tutor trajectory), and training student models on a subset of students (above or below average students).
+
+
+As we have discussed, Shayan’s current project adopts different methods to model students, and for each student model, we can have multiple policies (methods to find a policy). That’s why he need me to integrate my DKT student model (and probably expectimax search with DKT as well) into his framework.
+Shayan’s dataset comes from our group’s Fraction online tutor system. The structure is a bit different from Assistments: each problem consists of multiple steps; students will only meet the same problem once, but different problems can share same steps; different steps within the same problem can have different results. Basically, steps are skills. After exercises (a tutor session), the student will do a post test. Post test score is our reward.
+Besides student models, we also use the data to train a reward model. We first feed the tutor session trajectory to a student model, the use the final belief state to do a LASSO regression on post test score, which is our reward model. LASSO regression is linear regression with L1 regu- larization, so it automatically does feature selection for you. The regularization coefficient (the λ before |W|) needs tuning with cross validation. The correlation coefficient, r2, has multiple definitions, while 1 is always the best, and it could be negative (when we are doing a reaaly bad
+26
+regression, and the variance between the truth and prediction is even larger than the variance in the truth itself).
+With our reward model, we can do a better evaluation with our policy and student model. (We can’t use the student model to do post test, since the post test has different problems, thus the student model is not trained on that.)
+
+
+\subsection{Future Work}
+About the expectimax planning, it’s not a direct reuse, since the problem-step relationship is very different in Fraction. In this case, every step will have a result, so the expect node would have 2num_steps children. [** Need to check with Emma: for all the steps in a problem, do we treat them as simultaneous ones or consecutive ones? This would change the possibility of each child. **]
+For training we have different dataset (different ways to treat steps actually) to try on:
+• Original step ids (1500 instances) or compressed sensing ones
+• Knowledge components (KC, 105 instances) or other clusters
+• Tutorsessionplusposttestsession.Wewanttousetutorsession’sperformancetodirectly predict the post test results (and see how tutor steps relate to post test steps/problems).
+Basically, we can try with/without KC, with/without post test data. [** details consider post test data training are not clear. **]
+
+
+After finishing the DKT simulation code last week, and documenting the DKT training process, currently this project is inactive for me (I was only a sidekick anyway). We are not sure if we are going to need DKT-expectimax, since it would be prohibitive to even look ahead 3 steps (thus very myopic). It would be even more computationally intractable if we are going to do a more accurate simulation, where we treat steps of a probelm as consecutive ones (rather than simultaneous ones).
