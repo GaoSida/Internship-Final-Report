@@ -12,7 +12,7 @@ With our reward model, we can do a better evaluation with our policy and student
 
 
 \subsection{Future Work}
-About the expectimax planning, it’s not a direct reuse, since the problem-step relationship is very different in Fraction. In this case, every step will have a result, so the expect node would have 2num_steps children. [** Need to check with Emma: for all the steps in a problem, do we treat them as simultaneous ones or consecutive ones? This would change the possibility of each child. **]
+About the expectimax planning, it’s not a direct reuse, since the problem-step relationship is very different in Fraction. In this case, every step will have a result, so the expect node would have $2^{num_steps}$ children. [** Need to check with Emma: for all the steps in a problem, do we treat them as simultaneous ones or consecutive ones? This would change the possibility of each child. **]
 For training we have different dataset (different ways to treat steps actually) to try on:
 • Original step ids (1500 instances) or compressed sensing ones
 • Knowledge components (KC, 105 instances) or other clusters

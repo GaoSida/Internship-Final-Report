@@ -22,8 +22,24 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Knowledge Tracing Going Deep}{2}{subsection.2.1}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Implementing DKT}{3}{subsection.2.2}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Sanity Checks for DKT}{3}{subsection.2.3}}
-\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces An example of the knowledge tracing visualization of DKT and BKT on one of the simualated student trajectory. The row labels are student ids. The column labels, $qi|j$, are student actions in each time step: the question is on skill $i$, $j=1$ when the student answers correctly, otherwise $j=0$.\relax }}{4}{figure.caption.1}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces An example of the knowledge tracing visualization of DKT and BKT on one of the simualated student trajectory. The row labels are student ids. The column labels, $qi|j$, are student actions in each time step (with the leftmost action as the earliest): the question is on skill $i$, $j=1$ when the student answers correctly, otherwise $j=0$. Each column is the prediction for the action in the column label.\relax }}{4}{figure.caption.1}}
 \providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
-\newlabel{fig:good_match}{{1}{4}{An example of the knowledge tracing visualization of DKT and BKT on one of the simualated student trajectory. The row labels are student ids. The column labels, $qi|j$, are student actions in each time step: the question is on skill $i$, $j=1$ when the student answers correctly, otherwise $j=0$.\relax }{figure.caption.1}{}}
+\newlabel{fig:match}{{1}{4}{An example of the knowledge tracing visualization of DKT and BKT on one of the simualated student trajectory. The row labels are student ids. The column labels, $qi|j$, are student actions in each time step (with the leftmost action as the earliest): the question is on skill $i$, $j=1$ when the student answers correctly, otherwise $j=0$. Each column is the prediction for the action in the column label.\relax }{figure.caption.1}{}}
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {DKT result on student 9999.}}}{4}{subfigure.1.1}}
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Oracle BKT result on student 9999.}}}{4}{subfigure.1.2}}
+\@writefile{toc}{\contentsline {section}{\numberline {3}Deep Batch RL (for Education)}{4}{section.3}}
+\newlabel{deepRL}{{3}{4}{Deep Batch RL (for Education)}{section.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Model-based and Model-free RL}{5}{subsection.3.1}}
+\newlabel{subsec:model-free}{{3.1}{5}{Model-based and Model-free RL}{subsection.3.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}RL Going Deep}{5}{subsection.3.2}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.1}Deep World Model}{5}{subsubsection.3.2.1}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.2}Deep Q-Learning}{6}{subsubsection.3.2.2}}
+\newlabel{eq:Q}{{1}{6}{Deep Q-Learning}{equation.3.1}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.3}Deep Recurrent Q-Learning}{6}{subsubsection.3.2.3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Challenges in Batch RL}{7}{subsection.3.3}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.1}Reward Function Design}{7}{subsubsection.3.3.1}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.2}Constraints on Exploration}{7}{subsubsection.3.3.2}}
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Planning performances comparison. BKT and DKT models are used in a 5-step expectimax search for planning. The number of training instances is also listed. BKT-expectimax, with the BKT being the ground truth model, is the perfect policy. Random policy randomly picks a question at each time step, and serves as a baseline. (The 0.8 to 1.0 standard deviations are omitted in the table.)\relax }}{8}{table.caption.2}}
+\newlabel{tb:planning}{{1}{8}{Planning performances comparison. BKT and DKT models are used in a 5-step expectimax search for planning. The number of training instances is also listed. BKT-expectimax, with the BKT being the ground truth model, is the perfect policy. Random policy randomly picks a question at each time step, and serves as a baseline. (The 0.8 to 1.0 standard deviations are omitted in the table.)\relax }{table.caption.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}Future Work}{8}{subsection.3.4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.5}Future Work}{9}{subsection.3.5}}

@@ -1,9 +1,10 @@
 \section{Deep Batch RL (for Education)}
 \label{deepRL}
 
-In this project, we want to compare two methods, the model-free method (DRQN) and the model-based method (expectimax search with DKT), both based on deep learning models, on off-policy learning for offline (i.e. a batch of) educational data.
+In this project, we want to compare two methods, the model-free method (DRQN) and the model-based method (expectimax search with DKT), both based on deep learning models, on off-policy learning for offline (i.e. a batch of) educational data. I focused on the model-based method, including its implementation and evaluation. The model-free method is done by Li Zhou, a graduate student in our group, and I was involved in the discussions of it.
 
 \subsection{Model-based and Model-free RL}
+\label{subsec:model-free}
 
 In RL, our goal is to find the optimal policy in an unknown environment. There are mainly three ways of doing RL (the latter two are model-free methods, while we only focus on the comparison of the first two):
 
@@ -21,52 +22,84 @@ Our hypothesis is, model-free method should hold an advantage over model-based m
 
 DKT is a good world model in education. It's a simple step forward to adopt DKT to do planning. With a DKT, we know the knowledge belief state for the student given any practice history, so we can evaluate any policy based on this.
 
-To be more specific, we do a expectimax search with DKT. An expectimax seach tree has interleaving layers of max and expect nodes. A max node pick the children with the maximum value, while an expect node's value is an expectation of the value of its children. In our case, a max node will have children expect nodes each corresponding to an action (i.e. which skill to teach). An expect node will have children max nodes each corresponding to an 
+To be more specific, we do a expectimax search with DKT. An expectimax seach tree has interleaving layers of max and expect nodes. A max node pick the children with the maximum value, while an expect node's value is an expectation of the value of its children. In our case, a max node will have children expect nodes each corresponding to an action (i.e. which skill to teach). An expect node will have children max nodes each corresponding to a possible probabilty for each outcome of the action (i.e., correct or incorrect). DKT can assign a probabilty to each outcome based on the observed history, thus an expectation can be computed over the children max nodes.
 
-\subsubsection{Deep Q Learning}
+Unlike other tree search like minmax, expectimax tree could not be trimmed without a loss on the accuracy (since it's computing an expectation, and all the branch values are needed). Therefore, expectimax is expensive to compute (as is the case for most model-based algorithms).
 
-We are doing a Q-Learning algorithm in our project. Q-Learning is an off-policy algorithm, which means that the policy we pick in updating/learning Q-values isn't necessarily the actual policy we run. The Q-value updating function is (for discrete states):
+Besides conventional speed-up coding tricks like minimize the function calls and the use of abstract classes, we specifically made an optimization for DKT. Since DKT does sveral matrix multiplications for each input vector, we can stack several vectors into an input matrix and compute the output simultaneously. This trick significanly reduces the computation time to the one sixth of the unstacked version.
 
-\begin{equation*}
-    Q(s,a)= (1-\alpha)Q(s,a) + \alpha(R+\gamma\max\limits_{a'}Q(s',a'))
-\end{equation*}
+\subsubsection{Deep Q-Learning}
 
-where $\alpha$ is a constant, like a learning rate. From this equation we can get a better understanding of off-policy: the $a'$ we pick is not the action that actually run, but the action than can maximize the Q value in state $s'$.
+Q-Learning, a model-free RL algorithm, is off-policy, which means that the policy we pick in updating and learning Q-values isn't necessarily the actual policy we run. The Q-values should satisfy equation \ref{eq:Q}, the Bellman function.
 
-Our project is closely related to the Deep Q-Network (DQN) from Google Deepmind. DQN is an online (but off-policy) algorithm, which does exploration using $\epsilon-greedy$ search during training. However, when training the network, DQN employs an experience replay mechanism which feed randomized $(s, a, r, s')$ experience minibatches to CNN, which is pretty much off-line training. \reminder{Emma confirms that the online part, i.e. the $\epsilon-greedy$ search part does matter, but didn't explain in detail.} However, at least we know that Deep Q-Learning is totally feasible when changed to off-line.
+\begin{equation}
+\label{eq:Q}
+    Q(s,a)= R+\gamma\max\limits_{a'}Q(s',a'))
+\end{equation}
 
-First, for real world data, DKT (trained on a hold out dataset, unseen by DRQN or the expectimax-DKT) should serve as the "ground truth". This will be a comparison of the gener- alization ability of both methods. We are hoping that DRQN is better, since it’s more sample efficient (you need a lot of samples to train an accurate world model, but way less sample to simply know which is better). But a model-based method has its own intrinstic advantage, and there is less "black magic" than in DRQN. [** This seems to be a reinforment-learning related method that I should read more about. It’s one of the papers studied in the group meetings. **]
+where $R$ is the reward of state $s$, $\gamma$ is a discount factor for future's rewards, and other notations consistent with the description in \ref{subsec:model-free}. From this equation we can get a better understanding of off-policy: the $a'$ we pick is not the action that actually run, but the action than can maximize the Q value in state $s'$.
 
-Expectimax is intractable when we have more action choices, aka skills. On simulated data, we have the perfect performance, which is expectimax-BKT. We are hoping to see that DRQN can perform on par with this, and DKT should be worse (since DKT is only an estimation to the world model).
+For discrete states we can simply put the Q values in a table and do value iterations until the Bellman functions are satisfied (close to iterative methods to solve linear equations). Yet we can't do that for continuous states as in our case, so we want to learn a parameterized function to approximate the Q function. Previous works have shown that this function approximation is not guaranteed to converge when it's not linear, especially when it's a neural network.
 
+The Deep Q-Network\footnote{\textit{Human-level control through deep reinforcement learning}, Google DeepMind, 2016.} (DQN) adopts several ticks to resolve this diverging issue. DQN is an online (but still off-policy) algorithm, which does online exploration using $\epsilon-greedy$ search during training. Q-learning requires each update to be independant, thus when training the network, DQN employs an experience replay mechanism which feed randomized $(s, a, r, s')$ experience minibatches sampled from the pool of exploration history to the neural network. The loss that the neural network is minimizing is the difference of the left-hand and the right-hand size of equation \ref{eq:Q}.
 
-I had some dicussions with Li on several understandings of DRQN (although I’m not doing any experiments on that). Considering the two major tricks proposed in the DQN paper, replay only targets at online learning (where there are always new data coming, so we might want to sample mini-batches from the pool of our exploration history). Since we are doing epsilon- greedy exploration, the distribution of data acquired during training is actually shifting, thus very unstable. Therefore, we need to have a target network as the second trick, which updates slower and provides a more stable training target.
+The second trick is having a target network, which is identical to DQN but updated with a lower frequency. Since we are doing $\epsilon-greedy$ exploration, the distribution of data acquired during training is actually shifting, thus making the training very unstable (both sides of the Bellman equation is changing). If the two sides of the Bellman equation is provided by the same DQN, it would be like a dog chasing its own tail. The target network, however, can serve as a stable right-hand side of equation \ref{eq:Q}, thus resolve the diverging issue.
 
-Another subtlety considering Q-learning is that it requires each update to be independant, which is another reason for doing replay (breaking up the trajectories). In the DRQN paper, they reported that feeding full sequences of trajectories (thus updates are dependant) or ran- dom segments of trajectories (thus independant updates) doesn’t affect the performance. An- other magic of neural networks.
+\subsubsection{Deep Recurrent Q-Learning}
 
-\subsection{Batch RL's Constraints}
+The DQN deals with Atari games, where the state is fully observable from the consecutive 4 frames of the game. However, in our case, we are dealing with a partially observable environment, since we can only observe whether a student gets a problem correct, rather than their actual knowledge status. Therefore, we need to adopt an LSTM to map an action history (observations) to the Q-value. Previous work \footnote{\textit{Deep Recurrent Q-Learning for Partially Observable MDPs}, Matthew Hausknecht and Peter Stone, 2015.} has already added this extention to DQN, resulting in Deep Recurrent Q-Network (DRQN). However, in their work, the training of DRQN is still an online process.
 
-In RL, when we talk about batch we mean offline (so we have a huge batch of fixed data to train on). For online RL, it’s single data entry (since we are constantly getting new data through greedy dearch) or mini-batch. We are doing an offline RL task, thus batch RL.
+Although DKT and DRQN both adopt an LSTM, both take the trajectory of students' actions as inputs, and even have the same number of outputs (one for each skill), they are very different function approximators (i.e. completely different loss functions). DKT's output is an approximate of the student's knowledge status, i.e. the probability of getting each skill correct, thus a supervised learning model (the result of the next question serves as the label). The output of DRQN is the long-term utility (i.e. rewards) of picking each skill as next action (i.e. question to give). Unlike DKT, the DRQN can be directly used to pick a policy. 
 
-Reward design
+For real world data, besides being a comparison model of DRQN, another DKT instance, which is trained on a hold-out dataset unseen by DRQN or the expectimax-DKT, should serve as the "ground truth" for the evaluation of the policy picked by both DRQN and expectimax-DKT. However, we start with a comparison on BKT simualtion data, where the ground truth BKT model is known, thus a fair comparison between DRQN and expectimax-DKT.
 
-For model-free methods, we need to design a reward function that can get the rewards directly out of data. We are not looking for a myopic definition like getting a question correct. Currently we are using a one-time-only reward associated to each skill, which is awarded once the student get 3 corrects in a row. [** If we re-coded the joint skill questions, we need to unpack the skills and count for each skill separately. **]
-[** Here are more thoughts on multi-skill exercises. It matters in accounting rewards during training. Should we giving multi-skill questions during planning as well? What kind of combination of skills should we give? Is there a way to decide what is a "powerful" skill-combo? **]
-There are more variants of reward functions. A more natural one is to give a decaying re- ward for the same skill question. If we taking the applicability into consideration, we probably should also give negative rewards for the same skill since we could run out of exercises to give.
-To make the training of DRQN more stable, we could also try giving awards only when trial ends. Some regularization may be needed. [** I’m not very clear with the details in this part. **]
-And we could also use a discounted rewards, since we want to get rewards in the near future (the sooner the better).
+\subsection{Challenges in Batch RL}
 
-Exploration
+\subsubsection{Reward Function Design}
 
-However, for offline training, the data distribution is fixed, so maybe we don’t need a target network. However, emperically, it doesn’t make a difference. The loss would still explode when trained with many epochs. It needs mentioning that when the loss is at its minimum, the planning performance IS at its best.
+In any RL practice, we'll always face the challenge of how to properly define a reward function, since in most cases, the rewards would not be explicitly presented in ths data. A myopic or misspecified reward function might result in very undesirable outcomes\footnote{\textit{Concrete Problems in AI Safety}, Dario Amodei, Chris Olah, John Schulman, Jacob Stein- hardt, Paul Christiano, Dan Mane, 2016.}.
 
-One interesting finding (a sanity check actually) is that, when we modify the algorithm to online (since we have the ground truth simulator) it can perform on par with the optimal policy. When we do greedy search, it converges fast (because we have a lot of near-optimal sequences), while when we do completely random search, the performance drops after a short boost (just like the offline performance), then come back to the optimal performance eventually, which could be mainly due to the massive random dataset (in which there are enough good/near- optimal examples) that has already added in the pool. Greedy search is basically changing the training dataset, so we can easily accept the fact that it’s way better.
-Our main goal is to compare model-based and model-free methods on doing tutor plan- ning. DRQN and DKT, although both adopt an LSTM as core structure, are very different function approximation methods (not even close). The current drawback of DRQN is clear: unable to do exploration, thus require a massive amount (5 ∗ 105 episodes) of random data to see enough near-optimal trajectories. On the contrary, DKT can easily pick up a vague pre- requisite structure even under a small dataset (100episodes), by observing that some skills are easier to adopt in the begining while others are not. Based on this little knowledge, the expec- timax can get us an optimal policy. In this current setting, model-based method seems to win (especially when model-free method is not that sample efficient as we thought it should be).
-There are several concerns on the current experimant setting. We only has 20 trials for each episode, i.e. our horizon is fairly short. A method as shallow as DKT-expectimax (5 steps look ahead) can perform as near-perfect because we can only expect the students to learn those skills without prerequisites. If we have a setting where a shallow sight might be catastrphic (like a
-31
-longer horizon and a more complicated skill structure), we might see DRQN to win, since it can look infinite steps.
+The reward function should be based on the trajectories in the data. We are not looking for myopic definitions like getting a reward whenever question is correctly answered (which would result in the agent constanly giving the same question to hack a high reward). Currently we are using a one-time-only reward associated to each skill, which is awarded once the student get 3 correct in a row.
+
+In our DKT-expectimax framework, any trajectory based reward function can be swapped in. There are more variants of reward functions. A more natural one is to give a decaying reward for questions on the same skill. If we take the applicability into consideration, we probably should also give negative rewards for too many exercises on the same skill since we could run out of exercises in our pool. To make the training of DRQN more stable, we could also try giving awards only when trial ends, where some regularization may be needed. And we could also use discounted rewards, since we want to get rewards in the near future (the sooner the better).
+
+\subsubsection{Constraints on Exploration}
+
+In RL, when we talk about batch we mean offline (since we have a huge batch of fixed data to train on). For online RL, it’s single data entry (since we are constantly getting new data through greedy dearch) or mini-batch. We are doing an offline RL task, thus batch RL.
+
+Several obstacles were encountered after we altered the DRQN into an offline version (the only difference is that we have a fixed pool for experience replay, while in the online version there are always new data coming into the pool). First, the model starts diverging before converging to the minimum loss. Second, though the model can achive its best performance (which is significantly higher than a random policy) when the loss is at its minimum, it cannot achieve a comparable performance with DKT-expectimax. Currently, the experiments of DKT are only restricted to the BKT simulated data (where we have the ground truth BKT). Table \ref{tb:planning} shows the comparison of different models and settings.
+
+\begin{table}[]
+\centering
+\caption{Planning performances comparison. BKT and DKT models are used in a 5-step expectimax search for planning. The number of training instances is also listed. BKT-expectimax, with the BKT being the ground truth model, is the perfect policy. Random policy randomly picks a question at each time step, and serves as a baseline. (The 0.8 to 1.0 standard deviations are omitted in the table.)}
+\label{tb:planning}
+\begin{tabular}{|c|c|}
+\hline
+Algorithm       & Average rewards after a 20 problem episode \\ \hline
+BKT             & 2.6                                        \\ \hline
+DRQN \#ins=5000 & 2.1                                        \\ \hline
+DKT \#ins=5000  & 2.6                                        \\ \hline
+DKT \#ins=100   & 2.28                                       \\ \hline
+Random          & 0.94                                       \\ \hline
+\end{tabular}
+\end{table}
+
+As we have shown in section \ref{sec:DKT}, DKT can fully recover the BKT, so we are not surprised to see that a fully-trained DKT (with 5000 instances) can gain an optimal policy. However, in real world, we shouldn't expect DKT to fully recover the underlying model of real students. To better simulate this situation, we train DKT with little data (merely 100 instances). With this DKT, both the AUC on test set and the performance of its policy suffer a huge drop (which is consistent with our prior hypothesis, that DKT's performance is vulnerable to data available). 
+
+However, even an inaccurate DKT like that still outperforms DRQN, and in this case DRQN is trained on way more data. This greatly conflicts our prior hpothesis, since DRQN should be more sample efficient and unless the myopic expectimax which can only look 5 steps ahead (when keeping the computation feasible), DRQN's Q-value estimation is infinite horizon (i.e. looks infinite steps ahead). 
+
+We've tried several tricks and fine tuning for DRQN. For example, for offline training, the data distribution is fixed, so maybe we don’t need a target network like the online DQN. However, emperically, the trickes we have tried don’t make a difference.
+
+The breakthrough finding came when we modify the algorithm to online (which is only possible for simulation since we need the ground truth simulator) it can perform on par with the optimal policy. When we do greedy search, it converges fast (because we have a lot of near-optimal sequences), while when we do completely random search, the performance drops after a short boost (just like the offline performance), then come back to the optimal performance eventually, which could be mainly due to the massive (around $10^5$ episodes) random dataset (in which there are enough good/near-optimal examples) that has already added in the pool. Greedy search is basically changing the training dataset, so we can easily accept the fact that it’s way better.
+
+The current drawback of DRQN is clear: unable to do exploration, thus require a massive amount ($10^5$ episodes) of random data to see enough near-optimal trajectories. On the contrary, DKT can easily pick up a vague prerequisite structure even under a small dataset (100 episodes), by observing that some skills are easier to learn in the begining while others are not. Based on this little knowledge, the expectimax can get us an optimal policy. In this current setting, model-based method seems to win on planning performance (especially when model-free method is not that sample efficient as we thought it should be).
 
 \subsection{Future Work}
+
+There are several concerns on the current experimant setting. We only has 20 trials for each episode, i.e. our horizon is fairly short. A method as shallow as DKT-expectimax (5 steps look ahead) can perform as near-perfect because we can only expect the students to learn those skills without prerequisites. If we have a setting where a shallow sight might be catastrphic (like a 
+longer horizon and a more complicated skill structure), we might see DRQN to win, since it can look infinite steps.
+
+[** Here are more thoughts on multi-skill exercises. It matters in accounting rewards during training. Should we giving multi-skill questions during planning as well? What kind of combination of skills should we give? Is there a way to decide what is a "powerful" skill-combo? **]
 
 There is a very important thing to keep in mind: if all skills are independant, we don’t need to do expectimax, since it doesn’t matter what question we give (order doesn’t matter in this case). In another word, the more complicated the relationships between skills are, the more
 22

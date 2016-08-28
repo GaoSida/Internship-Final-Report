@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99992 (TeX Live 2015) (preloaded format=xelatex 2015.12.4)  28 AUG 2016 00:25
+This is XeTeX, Version 3.14159265-2.6-0.99992 (TeX Live 2015) (preloaded format=xelatex 2015.12.4)  28 AUG 2016 16:22
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -462,28 +462,64 @@ LaTeX Font Info:    Try loading font information for OT1+zplm on input line 8.
 (/usr/local/texlive/2015/texmf-dist/tex/latex/psnfss/ot1zplm.fd
 File: ot1zplm.fd 2002/09/08 Fontinst v1.914 font definitions for OT1/zplm.
 ) [2] [3]
-
-LaTeX Warning: Reference `fig' on page 4 undefined on input line 24.
-
 File: figures/5th_dkt_9999.png Graphic file (type QTm)
+
 <use  "figures/5th_dkt_9999.png" >
 File: figures/5th_bkt_9999.png Graphic file (type QTm)
  <use  "figures/5th_bkt_9999.png" >
-Overfull \hbox (2.73749pt too wide) in paragraph at lines 29--34
+Overfull \hbox (2.73749pt too wide) in paragraph at lines 31--36
 [][] 
  []
 
 
-Overfull \hbox (2.73749pt too wide) in paragraph at lines 29--34
+Overfull \hbox (2.73749pt too wide) in paragraph at lines 31--36
 [][] 
  []
 
 
-LaTeX Warning: Reference `sec:influence' on page 4 undefined on input line 38.
+LaTeX Warning: Reference `sec:influence' on page 4 undefined on input line 40.
 
-) (./deepRL.tex) (./fraction.tex) (./influence.tex) (./life.tex)
+) (./deepRL.tex [4]
+LaTeX Font Info:    Try loading font information for OMS+ppl on input line 12.
+
+(/usr/local/texlive/2015/texmf-dist/tex/latex/psnfss/omsppl.fd
+File: omsppl.fd 
+)
+LaTeX Font Info:    Font shape `OMS/ppl/m/n' in size <10.95> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 12.
+ [5] [6]
+Missing character: There is no ’ in font pplr8t!
+
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `tbp') on input line 72.
+
+[7]
+Missing character: There is no ’ in font pplr8t!
+Missing character: There is no ’ in font pplr8t!
+Missing character: There is no ’ in font pplr8t!
+Missing character: There is no ’ in font pplr8t!
+Missing character: There is no ’ in font pplr8t!
+Missing character: There is no ’ in font pplr8t!
+Missing character: There is no ’ in font pplr8t!
+Missing character: There is no ’ in font pplr8t!
+Missing character: There is no ’ in font pplr8t!
+ [8]) (./fraction.tex
+Missing character: There is no ’ in font pplr8t!
+Missing character: There is no ’ in font pplr8t!
+Missing character: There is no ’ in font pplr8t!
+Missing character: There is no ’ in font pplr8t!
+Missing character: There is no ’ in font pplr8t!
+Missing character: There is no λ in font pplr8t!
+Missing character: There is no ’ in font pplr8t!
+Missing character: There is no ’ in font pplr8t!
+Missing character: There is no • in font pplr8t!
+Missing character: There is no • in font pplr8t!
+Missing character: There is no • in font pplr8t!
+Missing character: There is no ’ in font pplr8t!
+ [9]) (./influence.tex) (./life.tex)
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 75.
- [4]
+ [10]
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 75.
 
 (./final_report.aux)
@@ -496,12 +532,12 @@ LaTeX Warning: There were undefined references.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 75.
  ) 
 Here is how much of TeX's memory you used:
- 10586 strings out of 493706
- 152119 string characters out of 6145769
- 227694 words of memory out of 5000000
- 13830 multiletter control sequences out of 15000+600000
- 33220 words of font info for 65 fonts, out of 8000000 for 9000
+ 10614 strings out of 493706
+ 152574 string characters out of 6145769
+ 228694 words of memory out of 5000000
+ 13855 multiletter control sequences out of 15000+600000
+ 33477 words of font info for 66 fonts, out of 8000000 for 9000
  1328 hyphenation exceptions out of 8191
- 44i,10n,47p,1359b,384s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 44i,10n,47p,1359b,382s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on final_report.pdf (4 pages).
+Output written on final_report.pdf (10 pages).

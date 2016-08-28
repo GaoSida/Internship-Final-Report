@@ -3,3 +3,14 @@
 \BOOKMARK [2][-]{subsection.2.1}{Knowledge\040Tracing\040Going\040Deep}{section.2}% 3
 \BOOKMARK [2][-]{subsection.2.2}{Implementing\040DKT}{section.2}% 4
 \BOOKMARK [2][-]{subsection.2.3}{Sanity\040Checks\040for\040DKT}{section.2}% 5
+\BOOKMARK [1][-]{section.3}{Deep\040Batch\040RL\040\(for\040Education\)}{}% 6
+\BOOKMARK [2][-]{subsection.3.1}{Model-based\040and\040Model-free\040RL}{section.3}% 7
+\BOOKMARK [2][-]{subsection.3.2}{RL\040Going\040Deep}{section.3}% 8
+\BOOKMARK [3][-]{subsubsection.3.2.1}{Deep\040World\040Model}{subsection.3.2}% 9
+\BOOKMARK [3][-]{subsubsection.3.2.2}{Deep\040Q-Learning}{subsection.3.2}% 10
+\BOOKMARK [3][-]{subsubsection.3.2.3}{Deep\040Recurrent\040Q-Learning}{subsection.3.2}% 11
+\BOOKMARK [2][-]{subsection.3.3}{Challenges\040in\040Batch\040RL}{section.3}% 12
+\BOOKMARK [3][-]{subsubsection.3.3.1}{Reward\040Function\040Design}{subsection.3.3}% 13
+\BOOKMARK [3][-]{subsubsection.3.3.2}{Constraints\040on\040Exploration}{subsection.3.3}% 14
+\BOOKMARK [2][-]{subsection.3.4}{Future\040Work}{section.3}% 15
+\BOOKMARK [2][-]{subsection.3.5}{Future\040Work}{section.3}% 16
