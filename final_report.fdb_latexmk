@@ -1,5 +1,5 @@
 # Fdb version 3
-["pdflatex"] 1472415735 "final_report.tex" "final_report.pdf" "final_report" 1472415736
+["pdflatex"] 1472421814 "final_report.tex" "final_report.pdf" "final_report" 1472421815
   "/usr/local/texlive/2015/texmf-dist/tex/generic/ifxetex/ifxetex.sty" 1284331290 1458 43ab4710dc82f3edeabecd0d099626b2 ""
   "/usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/gettitlestring.sty" 1303254447 8237 52810bdb4db2270e717422560a104aea ""
   "/usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/hobsub-generic.sty" 1338332114 189108 8b3553a56c83ff61acecb36b75d817e2 ""
@@ -50,19 +50,19 @@
   "/usr/local/texlive/2015/texmf-dist/tex/xelatex/xetex-def/xetex.def" 1427500247 17536 f287c5eacddc627c62141f8a352c932d ""
   "DKT.tex" 1472359266 7377 b8644a017aa5b52f0b31e8ea4fd5c277 ""
   "abstract.tex" 1472345746 1682 1dfc5c3663242198ead9b806ce38eabf ""
-  "deepRL.tex" 1472415731 16681 cbbac891b43390694eb6e1d3ebe8e433 ""
+  "deepRL.tex" 1472421810 16625 97de01b7af45353fca754e22d3672e31 ""
   "figures/5th_bkt_9999.png" 1469732786 104105 d016006aaba237588d0ba0288e0f123f ""
   "figures/5th_dkt_9999.png" 1469732777 272506 8320e9ea873ecb516cd27a5760332840 ""
-  "final_report.aux" 1472415736 4791 deebb6299820deda9ba903b1e302764d ""
-  "final_report.out" 1472415736 1215 4ed3cbb8ad79f76de59fa0ef2e6c2b62 ""
+  "final_report.aux" 1472421814 4945 094c554882cb622324fa9e644dd144b8 ""
+  "final_report.out" 1472421815 1271 90d9b5db753f40335211243ef30f1490 ""
   "final_report.tex" 1472358326 2593 7054f58063bd5a8662b107356075d759 ""
-  "fraction.tex" 1472400919 3630 b6071e6075a561e103a8ea8bba306b56 ""
+  "fraction.tex" 1472421706 3853 97dbfbd40d834ea23fe95f1b170fc394 ""
   "full_title.tex" 1472326118 244 ad7f8eb32f20cce2ec15d2140c26737a ""
   "influence.tex" 1472351177 102 c38c9c34cb66636dc20afbdd44dc6d7c ""
   "introduction.tex" 1472346710 4372 419dd92bd2cb48c459c4c6d95160dacf ""
   "life.tex" 1472324493 0 d41d8cd98f00b204e9800998ecf8427e ""
   (generated)
+  "final_report.log"
+  "final_report.aux"
   "final_report.out"
   "final_report.pdf"
-  "final_report.aux"
-  "final_report.log"

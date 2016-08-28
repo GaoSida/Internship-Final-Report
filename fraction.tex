@@ -1,4 +1,5 @@
-
+\section{Adaptive Fraction}
+\label{sec:fraction}
 
 Shayan’s project is actually quite like ours, to use old data to evaluate new policy. To test the robustness of the policies, we are aiming to make a matrix of how different student models perform under different policies. Major next steps we are thinking is combine the student and reward model as one (so that we can directly predict the posttest performance given the within- tutor trajectory), and training student models on a subset of students (above or below average students).
 
@@ -21,3 +22,5 @@ Basically, we can try with/without KC, with/without post test data. [** details 
 
 
 After finishing the DKT simulation code last week, and documenting the DKT training process, currently this project is inactive for me (I was only a sidekick anyway). We are not sure if we are going to need DKT-expectimax, since it would be prohibitive to even look ahead 3 steps (thus very myopic). It would be even more computationally intractable if we are going to do a more accurate simulation, where we treat steps of a probelm as consecutive ones (rather than simultaneous ones).
+
+Second, the current BKT inference model didn't fully leverage the prerequisite structure, since it doesn't update the children or ancestor's belief when encountered a skill.
