@@ -1,5 +1,5 @@
 \section{Deep Batch RL (for Education)}
-\label{deepRL}
+\label{sec:deepRL}
 
 In this project, we want to compare two methods, the model-free method (DRQN) and the model-based method (expectimax search with DKT), both based on deep learning models, on off-policy learning for offline (i.e. a batch of) educational data. I focused on the model-based method, including its implementation and evaluation. The model-free method is done by Li Zhou, a graduate student in our group, and I was involved in the discussions of it.
 
@@ -71,7 +71,6 @@ Several obstacles were encountered after we altered the DRQN into an offline ver
 
 \begin{table}[]
 \centering
-\label{tb:planning}
 \begin{tabular}{|c|c|}
 \hline
 Algorithm       & Average rewards after a 20 problem episode \\ \hline
@@ -82,6 +81,7 @@ DKT \#ins=100   & 2.28                                       \\ \hline
 Random          & 0.94                                       \\ \hline
 \end{tabular}
 \caption{Planning performances comparison. BKT and DKT models are used in a 5-step expectimax search for planning. The number of training instances is also listed. BKT-expectimax, with the BKT being the ground truth model, is the perfect policy. Random policy randomly picks a question at each time step, and serves as a baseline. (The 0.8 to 1.0 standard deviations are omitted in the table.)}
+\label{tb:planning}
 \end{table}
 
 As we have shown in section \ref{sec:DKT}, DKT can fully recover the BKT, so we are not surprised to see that a fully-trained DKT (with 5000 instances) can gain an optimal policy. However, in real world, we shouldn't expect DKT to fully recover the underlying model of real students. To better simulate this situation, we train DKT with little data (merely 100 instances). With this DKT, both the AUC on test set and the performance of its policy suffer a huge drop (which is consistent with our prior hypothesis, that DKT's performance is vulnerable to data available). 
@@ -100,6 +100,6 @@ Experimantal results so far have shown that deep batch Q-learning possibly could
 
 There are several concerns on the current experiment setting on simulation though. We only have 20 trials for each episode, i.e. our horizon is fairly short. A method as shallow as DKT-expectimax (5 steps look ahead) can perform as near-perfect because we can only expect the students to learn those skills without prerequisites. If we have a setting where a shallow sight might be catastrphic (like a longer horizon and a more complicated skill structure, with loose prerequisite relations as in the real world), we might see DRQN to win, since it can look infinite steps. However, none of these could account for the low performance of DRQN on the simpler simulation data (it should be able to get the optimal policy).
 
-A minor technical issue we need to point out here. First, currently the model-based method is technically not a real RL algorithm, since the reward model is not learned but directly coded in the tree search algorithm. We can use something like DKT to learn the model, but in this case it would be a regression task rather than a classification one. The fix won't be easy and is not going to help with our main concern (why DRQN is underperforming) either.
+A minor technical issue we need to point out here. Currently the model-based method is technically not a real RL algorithm, since the reward model is not learned but directly coded in the tree search algorithm. We can use something like DKT to learn the model, but in this case it would be a regression task rather than a classification one. However, this won't happen in application since the reward model in education is defined by human. The fix won't be easy and is not going to help with our main concern (why DRQN is underperforming) either.
 
 There are more interesting directions that we have in mind, including planning with multi-skill questions and making sense of the necessary horizon length for getting an optimal policy (in extreme cases like all the skills are independent, pick any skill wouldn't make a difference, thus zero horizon is as good as infinite horizon). As for application, we should also account for a certain dropout rate when searching for policy. If a student drops out in the middle, a short horizon might be better, since the long-term benefits we planned for the student might not pay off. These thoughts are even more off-topic, and could be discussed in future projects.

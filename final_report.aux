@@ -28,7 +28,7 @@
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {DKT result on student 9999.}}}{4}{subfigure.1.1}}
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Oracle BKT result on student 9999.}}}{4}{subfigure.1.2}}
 \@writefile{toc}{\contentsline {section}{\numberline {3}Deep Batch RL (for Education)}{4}{section.3}}
-\newlabel{deepRL}{{3}{4}{Deep Batch RL (for Education)}{section.3}{}}
+\newlabel{sec:deepRL}{{3}{4}{Deep Batch RL (for Education)}{section.3}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Model-based and Model-free RL}{5}{subsection.3.1}}
 \newlabel{subsec:model-free}{{3.1}{5}{Model-based and Model-free RL}{subsection.3.1}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.2}RL Going Deep}{5}{subsection.3.2}}
@@ -39,11 +39,56 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Challenges in Batch RL}{7}{subsection.3.3}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.1}Reward Function Design}{7}{subsubsection.3.3.1}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.2}Constraints on Exploration}{7}{subsubsection.3.3.2}}
-\newlabel{tb:planning}{{\caption@xref {tb:planning}{ on input line 74}}{8}{Constraints on Exploration}{table.caption.2}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Planning performances comparison. BKT and DKT models are used in a 5-step expectimax search for planning. The number of training instances is also listed. BKT-expectimax, with the BKT being the ground truth model, is the perfect policy. Random policy randomly picks a question at each time step, and serves as a baseline. (The 0.8 to 1.0 standard deviations are omitted in the table.)\relax }}{8}{table.caption.2}}
+\newlabel{tb:planning}{{1}{8}{Planning performances comparison. BKT and DKT models are used in a 5-step expectimax search for planning. The number of training instances is also listed. BKT-expectimax, with the BKT being the ground truth model, is the perfect policy. Random policy randomly picks a question at each time step, and serves as a baseline. (The 0.8 to 1.0 standard deviations are omitted in the table.)\relax }{table.caption.2}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.4}Future Work}{8}{subsection.3.4}}
 \@writefile{toc}{\contentsline {section}{\numberline {4}Adaptive Fraction}{9}{section.4}}
 \newlabel{sec:fraction}{{4}{9}{Adaptive Fraction}{section.4}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Robust Policy}{9}{subsection.4.1}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Future Work}{10}{subsection.4.2}}
 \@writefile{toc}{\contentsline {section}{\numberline {5}Influence of Skill Orders}{10}{section.5}}
+\newlabel{sec:influence}{{5}{10}{Influence of Skill Orders}{section.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Data Quality Issues for Assistments Dataset}{10}{subsection.5.1}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Four order schemes. Skill A has three records, while skill B has two. The numbers stand for the original(chronological) order within the same skill.\relax }}{11}{figure.caption.3}}
+\newlabel{fig:4order}{{2}{11}{Four order schemes. Skill A has three records, while skill B has two. The numbers stand for the original(chronological) order within the same skill.\relax }{figure.caption.3}{}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Chronological order}}}{11}{subfigure.2.1}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Numerical order}}}{11}{subfigure.2.2}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(c)}{\ignorespaces {Chronological-shuffle order}}}{11}{subfigure.2.3}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(d)}{\ignorespaces {Random order}}}{11}{subfigure.2.4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Reordering the Skills}{11}{subsection.5.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}Multi-skill Questions}{11}{subsection.5.3}}
+\newlabel{subfig:assist_repeat}{{3a}{12}{Subfigure 3a}{subfigure.3.1}{}}
+\newlabel{sub@subfig:assist_repeat}{{(a)}{a}{Subfigure 3a\relax }{subfigure.3.1}{}}
+\newlabel{subfig:assist_joint}{{3b}{12}{Subfigure 3b}{subfigure.3.2}{}}
+\newlabel{sub@subfig:assist_joint}{{(b)}{b}{Subfigure 3b\relax }{subfigure.3.2}{}}
+\newlabel{subfig:bkt_simul}{{3c}{12}{Subfigure 3c}{subfigure.3.3}{}}
+\newlabel{sub@subfig:bkt_simul}{{(c)}{c}{Subfigure 3c\relax }{subfigure.3.3}{}}
+\newlabel{subfig:fraction}{{3d}{12}{Subfigure 3d}{subfigure.3.4}{}}
+\newlabel{sub@subfig:fraction}{{(d)}{d}{Subfigure 3d\relax }{subfigure.3.4}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Reordering test results (AUC of prediction) on four datasets. Row labels are the order of the train set, and column labels are the order of the test set.\relax }}{12}{figure.caption.4}}
+\newlabel{fig:reorder}{{3}{12}{Reordering test results (AUC of prediction) on four datasets. Row labels are the order of the train set, and column labels are the order of the test set.\relax }{figure.caption.4}{}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Assistments, repeated scheme}}}{12}{subfigure.3.1}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Assistments, joint scheme}}}{12}{subfigure.3.2}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(c)}{\ignorespaces {BKT Simulation}}}{12}{subfigure.3.3}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(d)}{\ignorespaces {Fraction, 105 skills}}}{12}{subfigure.3.4}}
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Repeated scheme: repeated records for different skill tags of the same problem.\relax }}{12}{table.caption.5}}
+\newlabel{tb:repeated}{{2}{12}{Repeated scheme: repeated records for different skill tags of the same problem.\relax }{table.caption.5}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Joint Scheme: one record per problem, with a new skill id.\relax }}{13}{table.caption.6}}
+\newlabel{tb:joint}{{3}{13}{Joint Scheme: one record per problem, with a new skill id.\relax }{table.caption.6}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.4}Extracting Prerequisite Relations with Reordering}{13}{subsection.5.4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.5}Future Work}{13}{subsection.5.5}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces The per skill AUC drop on the BKT simulation test set when skill 0's order is shuffled. Skill 2 takes 0 and 1 as prerequisites, while skill 4 takes 2 and 3 as prerequisites.\relax }}{14}{figure.caption.7}}
+\newlabel{fig:drop}{{4}{14}{The per skill AUC drop on the BKT simulation test set when skill 0's order is shuffled. Skill 2 takes 0 and 1 as prerequisites, while skill 4 takes 2 and 3 as prerequisites.\relax }{figure.caption.7}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Summary}{14}{section.6}}
+\newlabel{sec:summary}{{6}{14}{Summary}{section.6}{}}
+\newlabel{subfig:skill_1}{{5b}{15}{Subfigure 5b}{subfigure.5.2}{}}
+\newlabel{sub@subfig:skill_1}{{(b)}{b}{Subfigure 5b\relax }{subfigure.5.2}{}}
+\newlabel{subfig:skill_4}{{5e}{15}{Subfigure 5e}{subfigure.5.5}{}}
+\newlabel{sub@subfig:skill_4}{{(e)}{e}{Subfigure 5e\relax }{subfigure.5.5}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces DKT's predictions when getting the same skill correct 20 times in a row. Each column is the belief state for a time step. Each row is the belief states of a skill over time.\relax }}{15}{figure.caption.8}}
+\newlabel{fig:20_in_a_row}{{5}{15}{DKT's predictions when getting the same skill correct 20 times in a row. Each column is the belief state for a time step. Each row is the belief states of a skill over time.\relax }{figure.caption.8}{}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Skill 0}}}{15}{subfigure.5.1}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Skill 1}}}{15}{subfigure.5.2}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(c)}{\ignorespaces {Skill 2}}}{15}{subfigure.5.3}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(d)}{\ignorespaces {Skill 3}}}{15}{subfigure.5.4}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(e)}{\ignorespaces {Skill 4}}}{15}{subfigure.5.5}}
