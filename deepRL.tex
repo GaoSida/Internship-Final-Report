@@ -71,7 +71,6 @@ Several obstacles were encountered after we altered the DRQN into an offline ver
 
 \begin{table}[]
 \centering
-\caption{Planning performances comparison. BKT and DKT models are used in a 5-step expectimax search for planning. The number of training instances is also listed. BKT-expectimax, with the BKT being the ground truth model, is the perfect policy. Random policy randomly picks a question at each time step, and serves as a baseline. (The 0.8 to 1.0 standard deviations are omitted in the table.)}
 \label{tb:planning}
 \begin{tabular}{|c|c|}
 \hline
@@ -82,6 +81,7 @@ DKT \#ins=5000  & 2.6                                        \\ \hline
 DKT \#ins=100   & 2.28                                       \\ \hline
 Random          & 0.94                                       \\ \hline
 \end{tabular}
+\caption{Planning performances comparison. BKT and DKT models are used in a 5-step expectimax search for planning. The number of training instances is also listed. BKT-expectimax, with the BKT being the ground truth model, is the perfect policy. Random policy randomly picks a question at each time step, and serves as a baseline. (The 0.8 to 1.0 standard deviations are omitted in the table.)}
 \end{table}
 
 As we have shown in section \ref{sec:DKT}, DKT can fully recover the BKT, so we are not surprised to see that a fully-trained DKT (with 5000 instances) can gain an optimal policy. However, in real world, we shouldn't expect DKT to fully recover the underlying model of real students. To better simulate this situation, we train DKT with little data (merely 100 instances). With this DKT, both the AUC on test set and the performance of its policy suffer a huge drop (which is consistent with our prior hypothesis, that DKT's performance is vulnerable to data available). 

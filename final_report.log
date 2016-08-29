@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99992 (TeX Live 2015) (preloaded format=xelatex 2015.12.4)  28 AUG 2016 18:03
+This is XeTeX, Version 3.14159265-2.6-0.99992 (TeX Live 2015) (preloaded format=xelatex 2015.12.4)  28 AUG 2016 21:21
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -488,6 +488,13 @@ LaTeX Font Info:    Font shape `OMS/ppl/m/n' in size <10.95> not available
 Missing character: There is no ’ in font pplr8t!
 
 
+Package caption Warning: \label without proper \caption on input line 74.
+See the caption package documentation for explanation.
+
+
+LaTeX Warning: Reference `tb:planning' on page 7 undefined on input line 70.
+
+
 LaTeX Warning: No positions in optional float specifier.
                Default added (so using `tbp') on input line 72.
 
@@ -496,17 +503,6 @@ Missing character: There is no ’ in font pplr8t!
 Missing character: There is no ’ in font pplr8t!
 Missing character: There is no ’ in font pplr8t!
  [8]) (./fraction.tex
-Missing character: There is no ’ in font pplr8t!
-Missing character: There is no ’ in font pplr8t!
-Missing character: There is no ’ in font pplr8t!
-Missing character: There is no ’ in font pplr8t!
-Missing character: There is no ’ in font pplr8t!
-Missing character: There is no λ in font pplr8t!
-Missing character: There is no ’ in font pplr8t!
-Missing character: There is no ’ in font pplr8t!
-Missing character: There is no • in font pplr8t!
-Missing character: There is no • in font pplr8t!
-Missing character: There is no • in font pplr8t!
 Missing character: There is no ’ in font pplr8t!
  [9]) (./influence.tex) (./life.tex)
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 75.
@@ -523,11 +519,11 @@ LaTeX Warning: There were undefined references.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 75.
  ) 
 Here is how much of TeX's memory you used:
- 10615 strings out of 493706
- 152585 string characters out of 6145769
+ 10616 strings out of 493706
+ 152597 string characters out of 6145769
  228694 words of memory out of 5000000
- 13856 multiletter control sequences out of 15000+600000
- 33477 words of font info for 66 fonts, out of 8000000 for 9000
+ 13857 multiletter control sequences out of 15000+600000
+ 34408 words of font info for 67 fonts, out of 8000000 for 9000
  1328 hyphenation exceptions out of 8191
  44i,10n,47p,1359b,382s stack positions out of 5000i,500n,10000p,200000b,80000s
 
